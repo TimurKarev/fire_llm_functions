@@ -1,7 +1,9 @@
 import io
+from typing import List
 
-from firebase_admin.storage import bucket as bucket_type
 from PyPDF2 import PdfReader
+from firebase_admin.storage import bucket as bucket_type
+from langchain.text_splitter import CharacterTextSplitter
 
 
 def get_file_from_firestore(bucket: bucket_type, path: str) -> io.BytesIO:
@@ -19,3 +21,13 @@ def get_text_from_pdf_file(pdf_file: io.BytesIO) -> str:
         text += page.extract_text()
 
     return text
+
+
+def plain_text_separator(text: str) -> List[str]:
+    text_splitter = CharacterTextSplitter(
+        separator="\n",
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len,
+    )
+    return text_splitter.split_text(text)
