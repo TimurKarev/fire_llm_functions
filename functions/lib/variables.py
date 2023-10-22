@@ -1,6 +1,6 @@
 from enum import IntEnum
 
 
-class EmbendingSize(IntEnum):
-    INSTRUCTOR = 768
+class EmbeddingTypeSized(IntEnum):
+    HUGGING_FACE_INSTRUCTOR = 768
     OPEN_AI = 1536

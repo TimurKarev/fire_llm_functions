@@ -1,11 +1,11 @@
-from typing import Tuple
+from langchain.embeddings import HuggingFaceInstructEmbeddings, OpenAIEmbeddings
 
-from langchain.embeddings import HuggingFaceInstructEmbeddings
-
-from .variables import EmbendingSize
+from .variables import EmbeddingTypeSized
 
 
-def get_instruct_embedding() -> Tuple[HuggingFaceInstructEmbeddings, int]:
-    return (HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl"),
-            EmbendingSize.INSTRUCTOR
-            )
+def get_embedding(type: EmbeddingTypeSized):
+    if (type == EmbeddingTypeSized.HUGGING_FACE_INSTRUCTOR):
+        return HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
+
+    if (type == EmbeddingTypeSized.OPEN_AI):
+        return OpenAIEmbeddings()

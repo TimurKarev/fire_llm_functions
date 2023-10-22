@@ -13,7 +13,7 @@ qdrant_client = QdrantClient(
 
 
 def get_or_create_collection(name: str, collection_size: int) -> types.CollectionInfo:
-    if (name in qdrant_client.get_collections()):
+    if (has_collection(name)):
         collection = qdrant_client.get_collection(collection_name=name)
     else:
         collection = qdrant_client.recreate_collection(collection_name=name,
@@ -24,6 +24,12 @@ def get_or_create_collection(name: str, collection_size: int) -> types.Collectio
                                                        )
 
     return collection
+
+
+def has_collection(name: str) -> bool:
+    for descr in qdrant_client.get_collections().collections:
+        if descr.name == name:
+            return True
 
 
 def get_vector_store(collection_name: str,
