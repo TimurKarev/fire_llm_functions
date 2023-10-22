@@ -5,10 +5,12 @@ from langchain.prompts import PromptTemplate
 from langchain.schema.runnable import RunnablePassthrough
 
 prompt_template = """You are the chatbot of e-shop.
-The following pieces of context is the e-shop rules, you have to give answers according this rules or explaining it. 
+The following pieces of context: Contract offer with E-SHOP named ООО «РусПластТорг»
+
+you have to give answers according this rules or explaining it. 
 
 If you don't know the answer, just say that you don't know, don't try to make up an answer. 
-Use three sentences maximum and keep the answer as concise as possible. 
+Use 5 sentences maximum and keep the answer as concise as possible. 
 
 {context}
 Question: {question}
